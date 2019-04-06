@@ -1,0 +1,33 @@
+import pandas as pd
+import csv
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+def difference(dataset, interval=1):
+	diff = list()
+	for i in range(interval, len(dataset)):
+		value = dataset[i] - dataset[i - interval]
+		diff.append(value)
+	return diff
+
+path = "compiled_data/sampling_20170702_full.csv"
+X = list()
+with open(path, 'r') as csvFile:
+    reader = csv.reader(csvFile)
+    for row in reader:
+        if(row[1] != "AWS"):
+            X.append(float(row[1]))
+csvFile.close()
+X = difference(X,2)
+
+print(sm.graphics.tsa.acf(X, nlags=10))
+sm.graphics.tsa.plot_acf(X, lags=10)
+
+# partial autocorrelation
+print(X)
+# print(sm.graphics.tsa.pacf(X, nlags=10, method="ywm"))
+# sm.graphics.tsa.plot_pacf(X, lags=10, method="ywm")
+
+
+
+plt.show()
