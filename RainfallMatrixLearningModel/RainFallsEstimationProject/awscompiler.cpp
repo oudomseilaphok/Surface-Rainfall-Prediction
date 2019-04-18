@@ -42,9 +42,8 @@ std::vector<std::string> AWSCompiler::getAWSRainyDay(std::string sourcePath, int
 		getline(file, humid, ',');
 		getline(file, sunshine, ',');
 		getline(file, sunshineDuration, '\n');
-
 		// Display all rainy day code		
-		if (utilityComponent.isFloat(rainFall) && strtof((rainFall).c_str(), 0) > 0) {
+		if (utilityComponent.isFloat(rainFall) && dateTime.substr(4, 4) == "-07-") {
 			if (currentDate == "" || std::find(resultdates.begin(), resultdates.end(), dateTime.substr(0, 10)) != resultdates.end() || currentDate != dateTime.substr(0, 10)) {
 				intervalCounter = 0;
 				currentDate = dateTime.substr(0, 10);
@@ -52,9 +51,9 @@ std::vector<std::string> AWSCompiler::getAWSRainyDay(std::string sourcePath, int
 			else {
 				intervalCounter++;
 				//dateTime.substr(0, 10) == "2017-07-02" || dateTime.substr(0, 10) == "2017-07-03" ||
-				if (intervalCounter >= timeInterval && (dateTime.substr(0, 10) == "2017-07-10" || dateTime.substr(0, 10) == "2017-07-02")) {
+				if (intervalCounter >= timeInterval) {
 					resultdates.push_back(dateTime.substr(0, 10));
-					//std::cout << std::left << std::setw(5) << resultdates.size() << std::setw(5) << dateTime.substr(0, 10) << '\n';
+					std::cout << std::left << std::setw(5) << resultdates.size() << std::setw(5) << dateTime.substr(0, 10) << '\n';
 				}
 			}
 		}

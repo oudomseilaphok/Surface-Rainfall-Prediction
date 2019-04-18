@@ -96,15 +96,15 @@ std::vector<string> showRainyScenario(string sourcePath, std::vector<string> dat
 		_allOneMinrainfallsTD.push_back(strtof((rainFall).c_str(), 0));
 		_allOneWindSpeedTD.push_back(strtof((windSpeed).c_str(), 0));
 		_allOneWindDirTD.push_back(strtof((windDirection).c_str(), 0));
-	
 		// Convert to 10 minutes / case Data because radar data has 10 minute / case
 		if (dateTime.substr(0, 4) == "2017") { //2017-01-02 18:18
 			if (dateTime.substr(15, 1) == "0") {
 
 				_10MinDatetimesTD.push_back(dateTime);
-				if (std::find(dates.begin(), dates.end(), dateTime.substr(0, 10)) != dates.end()) {
+				if ((std::find(dates.begin(), dates.end(), dateTime.substr(0, 10)) != dates.end()) && _10MinDatetimesTD.size() > 1) {
 					int _10MinPosition = std::find(_10MinDatetimesTD.begin(), _10MinDatetimesTD.end(), dateTime) - _10MinDatetimesTD.begin();
 					outputExperimentDateTimeTD.push_back(_10MinDatetimesTD[_10MinPosition - 1]);
+					
 				}
 				totalRainfalls = 0.0;
 			}
@@ -189,13 +189,15 @@ int main(int argc, char** argv)
 	int trainXaxis = utilityComponent.extractAWSLocation(gangWonLong[stationIndex], gangWonLat[stationIndex])[0];
 	int trainYaxis = utilityComponent.extractAWSLocation(gangWonLong[stationIndex], gangWonLat[stationIndex])[1];
 
-	datesTD = awsCompiler.getAWSRainyDay(trainDataSource, 5);
+	datesTD = awsCompiler.getAWSRainyDay(trainDataSource, 0);
+	
 	_availableExpDateTimeTD = showRainyScenario(trainDataSource, datesTD);
+	
 	fstream file;
 
-	int spatialArea = 5; // 3 = 3*3; 5 = 5*5
+	int spatialArea = 3; // 3 = 3*3; 5 = 5*5
 	int spatialRadius = (spatialArea - 1) / 2;
-	string filename = std::to_string(stationIndex) + "_20170702_0130_2340_5pixels.csv";
+	string filename = std::to_string(stationIndex) + "_20170702_0130_2340_3pixels.csv";
 	file.open(filename, fstream::out);
 	file << "Date,AWS,wind_speed,wind_direction";
 	for (int i = 1; i <= (spatialArea * spatialArea); i++) {
@@ -204,7 +206,7 @@ int main(int argc, char** argv)
 	file << "\n";
 
 	int startIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-02 01:30") - _availableExpDateTimeTD.begin();
-	int endIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-02 23:40") - _availableExpDateTimeTD.begin();
+	int endIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-10 23:40") - _availableExpDateTimeTD.begin();
 	
 	for (int j = startIndex; j <= endIndex; j++) {
 
