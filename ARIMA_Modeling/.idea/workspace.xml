@@ -13,23 +13,35 @@
     <favorites_list name="radar_vs_aws_research" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DB_Journal_Main_Code_ARIMAX.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DB_Journal_Code/DB_Journal_Main_Code_ARIMAX.py">
+    <leaf>
+      <file leaf-file-name="sampling_3_2017_07_02.csv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DB_Journal_Code/sampling_3_2017_07_02.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+            <state relative-caret-position="320">
+              <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test0.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DB_Journal_Code/test0.csv">
+      <file leaf-file-name="autocorrelation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DB_Journal_Code/autocorrelation.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
-              <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+              <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DB_Journal_Main_Code_ARIMAX.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DB_Journal_Code/DB_Journal_Main_Code_ARIMAX.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2428">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,22 +116,24 @@
         <option value="$PROJECT_DIR$/compiled_data/3_20170702_0130_2340_7pixels_short.csv" />
         <option value="$PROJECT_DIR$/sampling.py" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/3_20170702_0130_2340_3pixels.csv" />
-        <option value="$PROJECT_DIR$/Main_Code_ARIMAX.py" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/test1.csv" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/test2.csv" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/test3.csv" />
         <option value="$PROJECT_DIR$/autocorrelation.py" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/1week.csv" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/test0.csv" />
+        <option value="$PROJECT_DIR$/compiled_data/test.csv" />
+        <option value="$PROJECT_DIR$/Main_Code_ARIMAX.py" />
         <option value="$PROJECT_DIR$/DB_Journal_Code/DB_Journal_Main_Code_ARIMAX.py" />
+        <option value="$PROJECT_DIR$/DB_Journal_Code/autocorrelation.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-58" />
-    <option name="y" value="64" />
-    <option name="width" value="1333" />
-    <option name="height" value="894" />
+    <option name="x" value="17" />
+    <option name="y" value="240" />
+    <option name="width" value="2030" />
+    <option name="height" value="732" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -137,6 +151,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -153,7 +168,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -188,7 +202,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.DB_Journal_Main_Code_ARIMAX">
+  <component name="RunManager" selected="Python.autocorrelation (1)">
     <configuration name="DB_Journal_Main_Code_ARIMAX" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -223,19 +237,19 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="arima_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="autocorrelation (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DB_Journal_Code" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="radar_vs_aws_research" />
-      <option name="SCRIPT_NAME" value="C:\Users\BlueX\Desktop\radar_vs_aws_research\backlog_0321\arima_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DB_Journal_Code/autocorrelation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -276,18 +290,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.autocorrelation" />
-      <item index="1" class="java.lang.String" itemvalue="Python.arima_test" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Main_Code_ARIMAX" />
-      <item index="3" class="java.lang.String" itemvalue="Python.sampling" />
-      <item index="4" class="java.lang.String" itemvalue="Python.DB_Journal_Main_Code_ARIMAX" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Main_Code_ARIMAX" />
+      <item index="2" class="java.lang.String" itemvalue="Python.sampling" />
+      <item index="3" class="java.lang.String" itemvalue="Python.DB_Journal_Main_Code_ARIMAX" />
+      <item index="4" class="java.lang.String" itemvalue="Python.autocorrelation (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.DB_Journal_Main_Code_ARIMAX" />
-        <item index="1" class="java.lang.String" itemvalue="Python.autocorrelation" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Main_Code_ARIMAX" />
-        <item index="3" class="java.lang.String" itemvalue="Python.sampling" />
-        <item index="4" class="java.lang.String" itemvalue="Python.arima_test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.autocorrelation (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Main_Code_ARIMAX" />
+        <item index="2" class="java.lang.String" itemvalue="Python.DB_Journal_Main_Code_ARIMAX" />
+        <item index="3" class="java.lang.String" itemvalue="Python.autocorrelation" />
+        <item index="4" class="java.lang.String" itemvalue="Python.sampling" />
       </list>
     </recent_temporary>
   </component>
@@ -311,10 +325,10 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12739871" sideWeight="0.496208" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29584223" sideWeight="0.496208" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19609967" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14517877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -368,14 +382,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backlog_0321/test.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="3227" column="4" lean-forward="false" selection-start-line="3227" selection-start-column="4" selection-end-line="3227" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pyflux/tsm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
@@ -434,22 +440,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/compiled_data/sampling_20170702_short.csv" />
-    <entry file="file://$PROJECT_DIR$/compiled_data/3_20170702_0130_2340_7pixels_short.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="30" column="161" lean-forward="false" selection-start-line="30" selection-start-column="161" selection-end-line="30" selection-end-column="161" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/compiled_data/gangwon/2_20170715_0130_2340_7pixels.csv" />
     <entry file="file://$PROJECT_DIR$/compiled_data/gangwon/4_20170715_0130_2340_7pixels.csv" />
-    <entry file="file://$PROJECT_DIR$/compiled_data/gangwon/3_20170702_0130_2340_7pixels.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="124" column="31" lean-forward="false" selection-start-line="124" selection-start-column="31" selection-end-line="124" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/compiled_data/gangwon/2_20170711_0130_2340_7pixels.csv" />
     <entry file="file://$PROJECT_DIR$/compiled_data/gangwon/2_20170704_0130_2340_7pixels.csv" />
     <entry file="file://$PROJECT_DIR$/sampling.py">
@@ -467,29 +459,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DB_Journal_Code/20170702_0130_2340_3pixels.csv" />
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/2_20170710_0130_2340_3pixels.csv">
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/556_20170710_0130_2340_3pixels.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2145">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/3_20170710_0130_2340_3pixels.csv">
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/560_20170710_0130_2340_3pixels.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/3_20170702_0130_2340_3pixels.csv">
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/560_20170702_0130_2340_3pixels.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/2_20170702_0130_2340_3pixels.csv">
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/556_20170702_0130_2340_3pixels.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -500,6 +491,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6120">
           <caret line="306" column="45" lean-forward="false" selection-start-line="306" selection-start-column="45" selection-end-line="306" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autocorrelation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compiled_data/gangwon/3_20170702_0130_2340_7pixels.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="76" column="16" lean-forward="true" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compiled_data/3_20170702_0130_2340_7pixels_short.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="30" column="161" lean-forward="false" selection-start-line="30" selection-start-column="161" selection-end-line="30" selection-end-column="161" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compiled_data/test.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main_Code_ARIMAX.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="273" column="22" lean-forward="false" selection-start-line="273" selection-start-column="22" selection-end-line="273" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/test0.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/test2.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -512,51 +553,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/autocorrelation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main_Code_ARIMAX.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3854">
-          <caret line="264" column="0" lean-forward="true" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/test2.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/test1.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/test0.csv">
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/autocorrelation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DB_Journal_Code/DB_Journal_Main_Code_ARIMAX.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+        <state relative-caret-position="-2428">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DB_Journal_Code/sampling_3_2017_07_02.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
           <folding />
         </state>
       </provider>

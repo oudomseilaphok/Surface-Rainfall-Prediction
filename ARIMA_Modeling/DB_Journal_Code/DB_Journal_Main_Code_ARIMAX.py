@@ -7,30 +7,22 @@ import heapq
 import numpy as np
 import statsmodels.api as sm
 
-# create a differenced series
-def difference(dataset, interval=1):
-	diff = list()
-	for i in range(interval, len(dataset)):
-		value = dataset[i] - dataset[i - interval]
-		diff.append(value)
-	return diff
-
 
 def getExoArrayForTrain(length):
-        print(time[length])
+
+        # print(time[length])
         mapCorrelation = list()
         for j in range(0,len(radarData)):
             mapCorrelation.append(radarData[j][0:length])
         corrValue = list()
         for i in range(0,len(mapCorrelation)):
             corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
-       # print(corrValue)
+
         corrValue = np.array(corrValue)
         top3 = heapq.nlargest(3, range(len(corrValue)), corrValue.take)
 
         train_r1 = mapCorrelation[top3[0]][0:length]
         history_r1 = [x for x in train_r1]
-
 
         train_r2 = mapCorrelation[top3[1]][0:length]
         history_r2 = [x for x in train_r2]
@@ -55,12 +47,14 @@ def getExoArrayForTrain(length):
         # #print(history_r8)
         # train_r9 = mapCorrelation[top3[8]][0:length]
         # history_r9 = [x for x in train_r9]
+
         exo_array = list()
 
         for i in range(0, len(history_r2)):
             exo_array.append([history_r1[i], history_r2[i], history_r3[i]])
         # print(exo_array)
         return exo_array
+
 
 def getExoArrayForTest(length):
 
@@ -93,7 +87,7 @@ def getExoArrayForTest(length):
         # print([test_r1[0], test_r2[0], test_r3[0], test_r4[0], test_r5[0], test_r6[0], test_r7[0], test_r8[0], test_r9[0]])
         return [test_r1[0], test_r2[0], test_r3[0]]
 
-path = "test0.csv"
+path = "2_20170710_0130_2340_3pixels.csv"
 X = list()
 time = list()
 radarData = list()
@@ -118,37 +112,6 @@ spatialCorrelationValue_1 = list()
 spatialCorrelationValue_2 = list()
 spatialCorrelationValue_3 = list()
 
-# print('AWS')
-# print(X)
-# print('R1')
-# print(radarData[0])
-# print('R2')
-# print(radarData[1])
-# print('R3')
-# print(radarData[2])
-# print('R4')
-# print(radarData[3])
-# print('R5')
-# print(radarData[4])
-# print('R6')
-# print(radarData[5])
-# print('R7')
-# print(radarData[6])
-# print('R8')
-# print(radarData[7])
-# print('R9')
-# print(radarData[8])
-
-
-
-x_actual_for_error = list()
-x_predict_for_error_arima = list()
-x_predict_for_error_arimax = list()
-
-# x_actual_for_error = [5,6,2,5]
-# x_predict_for_error_arima = [5,6,2,5]
-# x_predict_for_error_arimax = [5,6,2,4]
-#X = difference(X,2)
 
 train, test = X[0:size], X[size:len(X)]
 history = [x for x in train]
@@ -156,8 +119,8 @@ history = [x for x in train]
 predictions_arima = list()
 predictions_arimax = list()
 for t in range(len(test)):
-    #c = constant include, #nc = no constant
 
+    #c = constant include, #nc = no constant
     model_arima = ARIMA(endog=history, order=(1, 0, 0))
     model_fit_arima = model_arima.fit(disp=0, trend='nc', method='css')  # , Ŷt - ϕ1Yt-1 = μ - θ1et-1 Formula Main ARIMA
     output_arima = model_fit_arima.forecast()
@@ -167,39 +130,27 @@ for t in range(len(test)):
     model_arimax = ARIMA(endog=history, order=(1, 0, 0), exog=getExoArrayForTrain(len(history)))
     model_fit_arimax = model_arimax.fit(disp=0, trend='nc', method='css') #, Ŷt - ϕ1Yt-1 = μ - θ1et-1 + β(Xt - ϕ1Xt-1) Formula Main ARIMAX
     output_arimax = model_fit_arimax.forecast(exog=getExoArrayForTest(len(history)))
-
     y_arimax = output_arimax[0]
-    # print(output_arimax)
     predictions_arimax.append(y_arimax)
 
     allTemporalCorrelationValue.append((sm.graphics.tsa.acf(history, nlags=1))[1])
     obs = test[t]
     history.append(obs)
-    if obs > 0:
-         x_actual_for_error.append(obs)
-         x_predict_for_error_arima.append(y_arima)
-         x_predict_for_error_arimax.append(y_arimax)
-         print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
-         print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
+    print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
+    print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
 
-def mean_absolute_percentage_error(y_true, y_pred):
-    y_true, y_pred = np.array(y_true), np.array(y_pred)
-    return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
 
 
 error_mse = mt.mean_squared_error(test, predictions_arima)
 print('ARIMA Test MSE: %.3f' % error_mse)
 error_mae = mt.mean_absolute_error(test, predictions_arima)
 print('ARIMA Test MAE: %.3f' % error_mae)
-error_smape = mean_absolute_percentage_error(x_actual_for_error, x_predict_for_error_arima)
-print('ARIMA Test MAPE: %.3f' % error_smape)
+
 
 error_mse = mt.mean_squared_error(test, predictions_arimax)
 print('ARIMAX Test MSE: %.3f' % error_mse)
 error_mae = mt.mean_absolute_error(test, predictions_arimax)
 print('ARIMAX Test MAE: %.3f' % error_mae)
-error_smape = mean_absolute_percentage_error(x_actual_for_error, x_predict_for_error_arimax)
-print('ARIMAX Test MAPE: %.3f' % error_smape)
 
 
 print(sum(allTemporalCorrelationValue) / len(allTemporalCorrelationValue))
@@ -207,16 +158,12 @@ print(sum(spatialCorrelationValue_1) / len(spatialCorrelationValue_1))
 print(sum(spatialCorrelationValue_2) / len(spatialCorrelationValue_2))
 print(sum(spatialCorrelationValue_3) / len(spatialCorrelationValue_3))
 
-# plot
-# array1 = train + test
-# array2 = train + predictions
 array1 = test
 array2 = predictions_arima
 array3 = predictions_arimax
+
 pyplot.plot(array1)
 pyplot.plot(array2, color='orange')
-# pyplot.axis([0, len(array1),0,1.5])
 pyplot.axis([0, len(array1),0,1.5])
-#pyplot.xticks(range(len(array1)), time[len(train):len(time)-1])
 pyplot.plot(array3, color='red')
 pyplot.show()

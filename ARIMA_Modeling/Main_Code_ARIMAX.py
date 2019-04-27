@@ -208,7 +208,7 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir):
     return  resultTopIndex
 
 # MAIN CODE START HERE:
-path = "compiled_data/gangwon/3_20170702_0130_2340_7pixels.csv"
+path = "compiled_data/gangwon/2_20170710_0130_2340_7pixels.csv"
 scanningRange = 3
 radarRange = 7 # 7 = 7 * 7
 nSelect = 3
@@ -219,6 +219,8 @@ windSpeed = list()
 windDirection = list()
 allTemporalCorrelationValue = list()
 spatialCorrelationValue = list()
+actual_data_percentage = list()
+predict_data_percentage = list()
 
 
 with open(path, 'r') as csvFile:
@@ -248,7 +250,7 @@ predictions_arimax = list()
 for t in range(len(test)):
     #c = constant include, #nc = no constant
 
-    model_arima = ARIMA(endog=history, order=(1, 2, 0))
+    model_arima = ARIMA(endog=history, order=(1, 0, 0))
     model_fit_arima = model_arima.fit(disp=0, trend='nc', method='css')  # , Ŷt - ϕ1Yt-1 = μ - θ1et-1 Formula Main ARIMA
     output_arima = model_fit_arima.forecast()
     y_arima = output_arima[0]
@@ -265,13 +267,19 @@ for t in range(len(test)):
 
     obs = test[t]
     history.append(obs)
+    if obs > 0.25:
+        actual_data_percentage.append(obs)
+        predict_data_percentage.append(y_arimax)
+        print(obs)
+        print(y_arimax)
+        print(abs(y_arimax - obs) / obs)
     # print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
     # print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
 
-error_mse = mt.mean_squared_error(test, predictions_arima)
-print('ARIMA Test MSE: %.3f' % error_mse)
-error_mae = mt.mean_absolute_error(test, predictions_arima)
-print('ARIMA Test MAE: %.3f' % error_mae)
+# error_mse = mt.mean_squared_error(test, predictions_arima)
+# print('ARIMA Test MSE: %.3f' % error_mse)
+# error_mae = mt.mean_absolute_error(test, predictions_arima)
+# print('ARIMA Test MAE: %.3f' % error_mae)
 #
 # error_mse = mt.mean_squared_error(test, predictions_arimax)
 # print('ARIMAX Test MSE: %.3f' % error_mse)
@@ -283,10 +291,10 @@ print('ARIMA Test MAE: %.3f' % error_mae)
 # print('spatial corr:')
 # print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
 
-# error_mape = mean_absolute_percentage_error(test, predictions_arima)
-# print('ARIMAX Test MSE: %.3f' % error_mape)
-# error_mape = mt.mean_absolute_error(test, predictions_arimax)
-# print('ARIMAX Test MAE: %.3f' % error_mape)
+error_mape = mean_absolute_percentage_error(actual_data_percentage, predict_data_percentage)
+print('ARIMAX Test MAPE: %.3f' % error_mape)
+error_mape = mt.mean_absolute_error(test, predictions_arimax)
+print('ARIMAX Test MAE: %.3f' % error_mape)
 
 # plot
 # array1 = train + test
@@ -301,7 +309,7 @@ maxValue.append(max(array2))
 # maxValue.append(max(array3))
 
 pyplot.plot(array1)
-pyplot.plot(array2, color='orange')
+#pyplot.plot(array2, color='orange')
 # pyplot.axis([0, len(array1),0,1.5])
 pyplot.axis([0, len(array1),0, (max(maxValue) + 0.1)])
 #pyplot.xticks(range(len(array1)), time[len(train):len(time)-1])
