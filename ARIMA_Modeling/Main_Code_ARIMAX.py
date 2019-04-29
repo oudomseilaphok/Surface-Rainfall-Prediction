@@ -51,8 +51,7 @@ def getExoArrayForTrain(length, scanningRange):
             corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
 
         windDir = windDirection[length]
-
-        # print(time[length])
+        print(time[length])
         # print(windDir)
         topSection = scanningForMaxArea(scanningRange, corrValue, windDir)
         topSectionDataArray = list()
@@ -65,13 +64,16 @@ def getExoArrayForTrain(length, scanningRange):
             topSectionCorrValues.append(corrValue[topSection[topIndex]])
         # print(topSectionCorrValues)
         spatialCorrelationValue.append(sum(topSectionCorrValues) / len(topSectionCorrValues))
+
         exo_array = list()
         for i in range(0, len(topSectionDataArray[0])):
             dataRow = list()
+            dataRow.append(windSpeed[i])
+            print(windSpeed[i])
             for k in range(0, len(topSectionDataArray)):
                 dataRow.append(topSectionDataArray[k][i])
             exo_array.append(dataRow)
-
+        print("hello")
         return exo_array
 
 # Seila : Get Spatial Variable for Predicting Data
@@ -94,8 +96,10 @@ def getExoArrayForTest(length, scanningRange):
             test_future = [x for x in test]
             topSectionDataArray.append(test_future)
         dataRow = list()
+        dataRow.append(windSpeed[length])
         for k in range(len(topSectionDataArray)):
             dataRow.append(topSectionDataArray[k][0])
+        print(windSpeed[length])
         return dataRow
 
 def matrixPruing(windDirection): #for 7 * 7 Matrix
@@ -208,7 +212,7 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir):
     return  resultTopIndex
 
 # MAIN CODE START HERE:
-path = "compiled_data/gangwon/2_20170710_0130_2340_7pixels.csv"
+path = "compiled_data/gangwon/3_20170702_0130_2340_7pixels.csv"
 scanningRange = 3
 radarRange = 7 # 7 = 7 * 7
 nSelect = 3
@@ -267,12 +271,12 @@ for t in range(len(test)):
 
     obs = test[t]
     history.append(obs)
-    if obs > 0.25:
+    if obs > 0.1:
         actual_data_percentage.append(obs)
         predict_data_percentage.append(y_arimax)
         print(obs)
-        print(y_arimax)
-        print(abs(y_arimax - obs) / obs)
+        # print(y_arimax)
+        # print(abs(y_arimax - obs) / obs)
     # print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
     # print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
 
