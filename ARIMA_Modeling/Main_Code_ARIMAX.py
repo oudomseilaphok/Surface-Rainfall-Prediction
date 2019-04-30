@@ -13,7 +13,7 @@ def mean_absolute_percentage_error(y_true, y_pred):
     y_true, y_pred = np.array(y_true), np.array(y_pred)
     return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
 
-# Seila : Differencing Algorithm
+# Seila : Differencing Algorithm for testing
 def difference(dataset, interval=1):
 	diff = list()
 	for i in range(interval, len(dataset)):
@@ -21,26 +21,7 @@ def difference(dataset, interval=1):
 		diff.append(value)
 	return diff
 
-# Seila : Testing Accuracy of ARIMA p,d,q based on different configuration
-def acurracyTestARIMA(data,p,d,q):
-    predictions = list()
-    data_size = int(len(data) * 0.5)
-    train_arima, test_arima = data[0:data_size], data[data_size:len(data)]
-    trainData = [x for x in train_arima]
-    for t in range(len(test_arima)):
-        model_arima = ARIMA(endog=trainData, order=(p, d, q))
-        model_fit_arima = model_arima.fit(disp=0, trend='nc', method='css')
-        output_arima = model_fit_arima.forecast()
-        y_arima = output_arima[0]
-        predictions.append(y_arima)
-        actual = test_arima[t]
-        trainData.append(actual)
-
-    print('ARIMA Test MSE: %.3f' % mt.mean_squared_error(test_arima, predictions))
-    print('ARIMA Test MAE: %.3f' % mt.mean_absolute_error(test_arima, predictions))
-
-
-# Seila : Get Spatial Variable for Training Data
+# Seila : Get Spatial Variables and Wind Speed for Training Data
 def getExoArrayForTrain(length, scanningRange):
 
         mapCorrelation = list()
@@ -50,30 +31,37 @@ def getExoArrayForTrain(length, scanningRange):
         for i in range(0,len(mapCorrelation)):
             corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
 
+        #wind direction at the targeted time
         windDir = windDirection[length]
-        print(time[length])
-        # print(windDir)
+
+        #extracted the targeted radar variables indexes by pruning and scanning logic
         topSection = scanningForMaxArea(scanningRange, corrValue, windDir)
         topSectionDataArray = list()
         topSectionCorrValues = list()
 
+        #put all top variables data into array of arrays "topSectionDataArray"
+        #put all top variables correlation value into array "topSectionCorrValues"
         for topIndex in range(len(topSection)):
             train = mapCorrelation[topSection[topIndex]][0:length]
             history = [x for x in train]
             topSectionDataArray.append(history)
             topSectionCorrValues.append(corrValue[topSection[topIndex]])
-        # print(topSectionCorrValues)
+
+        #For getting average spatial value for showing in Figure
         spatialCorrelationValue.append(sum(topSectionCorrValues) / len(topSectionCorrValues))
 
+        #converting data into row by row arrays for training model
         exo_array = list()
         for i in range(0, len(topSectionDataArray[0])):
             dataRow = list()
+
+            #include windspeed as variable
             dataRow.append(windSpeed[i])
-            print(windSpeed[i])
+
             for k in range(0, len(topSectionDataArray)):
                 dataRow.append(topSectionDataArray[k][i])
             exo_array.append(dataRow)
-        print("hello")
+
         return exo_array
 
 # Seila : Get Spatial Variable for Predicting Data
@@ -87,6 +75,7 @@ def getExoArrayForTest(length, scanningRange):
         for i in range(0,len(mapCorrelation)):
             corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
 
+        #perform the same scan to extract the same value for the model predicting time
         windDir = windDirection[length]
         topSection = scanningForMaxArea(scanningRange, corrValue, windDir)
         topSectionDataArray = list()
@@ -96,12 +85,15 @@ def getExoArrayForTest(length, scanningRange):
             test_future = [x for x in test]
             topSectionDataArray.append(test_future)
         dataRow = list()
+        #include windspeed for prediction
         dataRow.append(windSpeed[length])
         for k in range(len(topSectionDataArray)):
             dataRow.append(topSectionDataArray[k][0])
-        print(windSpeed[length])
+
         return dataRow
 
+
+#Seila: Pruning matrix based on wind direction
 def matrixPruing(windDirection): #for 7 * 7 Matrix
     prunedCells = list()
     if (windDirection <= 22.5 or windDirection > 337.5): #N
@@ -155,14 +147,23 @@ def matrixPruing(windDirection): #for 7 * 7 Matrix
     return prunedCells
 
 
-# Seila : SSM Scanning Algorithm, outputting index of max correlation value section
+# Seila : SSM Scanning Algorithm, outputting index of top correlated pixels
 def scanningForMaxArea(scanningWindow, corrValueDatas, windDir):
+
     #define exclusion
     allSectionCellIndex = list()
     allSectionCellCorrelation = list()
-    totalCells = len(corrValueDatas) #total cell data
-    exCells = list() #cell section that excluded from scanning
+
+    # total cell data
+    totalCells = len(corrValueDatas)
+
+    # cell section that excluded from scanning
+    exCells = list()
+
+    # output the cells that will be pruned from scanning
     prunedCells = matrixPruing(windDir)
+
+    # scanning is based on top left cells of all sections, so excludes the cell at the right corners
     for ex in range(scanningWindow - 1):
 
         for rowEx in range(int(math.sqrt(totalCells))):
@@ -171,19 +172,19 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir):
         for colsEx in range(int(math.sqrt(totalCells))):
             exCells.append((totalCells - (radarRange * (ex + 1)) + (colsEx + 1)) - 1)
 
-
+    # start scanning by considering excluded cells and pruned cells
     for i in range(len(corrValueDatas)):
         if i not in (exCells):
             totalCorr = 0
             sectionCellIndexs = list()
             for row in range(scanningWindow):
-                #totalCorr = totalCorr + corrValueDatas[i + (5 * row)]
+
+                
                 for col in range(scanningWindow):
                     totalCorr = totalCorr + corrValueDatas[i + col  + (radarRange * row)]
-                    sectionCellIndexs.append(i + col  + (radarRange * row))
+                    sectionCellIndexs.append(i + col + (radarRange * row))
 
             # pruning here in the code (If section has prunedCells)
-
             isPrunedSection = False
             for sectionCellIndex in sectionCellIndexs:
                 if sectionCellIndex in prunedCells:
