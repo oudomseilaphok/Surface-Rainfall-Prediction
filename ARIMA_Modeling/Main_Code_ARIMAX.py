@@ -213,7 +213,7 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir):
     return  resultTopIndex
 
 # MAIN CODE START HERE:
-path = "compiled_data/gangwon/3_20170702_0130_2340_7pixels.csv"
+path = "compiled_data/gangwon/4_20170710_0130_2340_7pixels.csv"
 scanningRange = 3
 radarRange = 7 # 7 = 7 * 7
 nSelect = 3
@@ -275,31 +275,31 @@ for t in range(len(test)):
     if obs > 0.1:
         actual_data_percentage.append(obs)
         predict_data_percentage.append(y_arimax)
-        print(obs)
+        # print(obs)
         # print(y_arimax)
         # print(abs(y_arimax - obs) / obs)
     # print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
     # print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
 
-# error_mse = mt.mean_squared_error(test, predictions_arima)
-# print('ARIMA Test MSE: %.3f' % error_mse)
-# error_mae = mt.mean_absolute_error(test, predictions_arima)
-# print('ARIMA Test MAE: %.3f' % error_mae)
-#
-# error_mse = mt.mean_squared_error(test, predictions_arimax)
-# print('ARIMAX Test MSE: %.3f' % error_mse)
-# error_mae = mt.mean_absolute_error(test, predictions_arimax)
-# print('ARIMAX Test MAE: %.3f' % error_mae)
+error_mse = mt.mean_squared_error(test, predictions_arima)
+print('ARIMA Test MSE: %.3f' % error_mse)
+error_mae = mt.mean_absolute_error(test, predictions_arima)
+print('ARIMA Test MAE: %.3f' % error_mae)
+
+error_mse = mt.mean_squared_error(test, predictions_arimax)
+print('ARIMAX Test MSE: %.3f' % error_mse)
+error_mae = mt.mean_absolute_error(test, predictions_arimax)
+print('ARIMAX Test MAE: %.3f' % error_mae)
 
 # print('temporal corr:')
 # print(sum(allTemporalCorrelationValue) / len(allTemporalCorrelationValue))
 # print('spatial corr:')
 # print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
 
-error_mape = mean_absolute_percentage_error(actual_data_percentage, predict_data_percentage)
-print('ARIMAX Test MAPE: %.3f' % error_mape)
-error_mape = mt.mean_absolute_error(test, predictions_arimax)
-print('ARIMAX Test MAE: %.3f' % error_mape)
+# error_mape = mean_absolute_percentage_error(actual_data_percentage, predict_data_percentage)
+# print('ARIMAX Test MAPE: %.3f' % error_mape)
+# error_mape = mt.mean_absolute_error(test, predictions_arimax)
+# print('ARIMAX Test MAE: %.3f' % error_mape)
 
 # plot
 # array1 = train + test
