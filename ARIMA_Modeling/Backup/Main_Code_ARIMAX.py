@@ -22,7 +22,7 @@ def difference(dataset, interval=1):
 	return diff
 
 # Seila : Get Spatial Variables and Wind Speed for Training Data
-def getExoArrayForTrain(length, scanningRange, includeWindDirection, includeWindSpeed):
+def getExoArrayForTrain(length, scanningRange):
 
         mapCorrelation = list()
         for j in range(0,len(radarData)):
@@ -30,14 +30,12 @@ def getExoArrayForTrain(length, scanningRange, includeWindDirection, includeWind
         corrValue = list()
         for i in range(0,len(mapCorrelation)):
             corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
-            # corrValue.append(sp.spearmanr(X[0:length], mapCorrelation[i])[0])
 
         #wind direction at the targeted time
         windDir = windDirection[length]
-        # print(time[length])
-        # print(corrValue)
+
         #extracted the targeted radar variables indexes by pruning and scanning logic
-        topSection = scanningForMaxArea(scanningRange, corrValue, windDir, includeWindDirection)
+        topSection = scanningForMaxArea(scanningRange, corrValue, windDir)
         topSectionDataArray = list()
         topSectionCorrValues = list()
 
@@ -68,7 +66,7 @@ def getExoArrayForTrain(length, scanningRange, includeWindDirection, includeWind
         return exo_array
 
 # Seila : Get Spatial Variable for Predicting Data
-def getExoArrayForTest(length, scanningRange, includeWindDirection, includeWindSpeed):
+def getExoArrayForTest(length, scanningRange):
 
         mapCorrelation = list()
         for j in range(0, len(radarData)):
@@ -80,7 +78,7 @@ def getExoArrayForTest(length, scanningRange, includeWindDirection, includeWindS
 
         #perform the same scan to extract the same value for the model predicting time
         windDir = windDirection[length]
-        topSection = scanningForMaxArea(scanningRange, corrValue, windDir, includeWindDirection)
+        topSection = scanningForMaxArea(scanningRange, corrValue, windDir)
         topSectionDataArray = list()
 
         for topIndex in range(len(topSection)):
@@ -155,7 +153,7 @@ def matrixPruing(windDirection): #for 7 * 7 Matrix
 
 
 # Seila : SSM Scanning Algorithm, outputting index of top correlated pixels
-def scanningForMaxArea(scanningWindow, corrValueDatas, windDir, includeWindDirection):
+def scanningForMaxArea(scanningWindow, corrValueDatas, windDir):
 
     #define exclusion
     allSectionCellIndex = list()
@@ -222,10 +220,10 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir, includeWindDirec
     return  resultTopIndex
 
 # MAIN CODE START HERE:
-# path = "compiled_data/gangwon/2_20170710_0130_2340_7pixels.csv"
-path = "compiled_data/3_20170702_0130_2340_7pixels_short.csv"
-main_includeWindDirection = True
-main_includeWindSpeed = True
+path = "compiled_data/gangwon/4_20170710_0130_2340_7pixels.csv"
+# path = "compiled_data/3_20170702_0130_2340_7pixels_short.csv"
+includeWindDirection = True
+includeWindSpeed = True
 scanningRange = 3
 radarRange = 7 # 7 = 7 * 7
 nSelect = 3
@@ -274,15 +272,10 @@ for t in range(len(test)):
     y_arima = output_arima[0]
     predictions_arima.append(y_arima)
 
-    # model_arima = ARIMA(endog=history, order=(1, 0, 0), exog=getExoArrayForTrain(len(history), scanningRange, False, False))
-    # model_fit_arima = model_arima.fit(disp=0, trend='nc', method='css')  # , Ŷt - ϕ1Yt-1 = μ - θ1et-1 Formula Main ARIMA
-    # output_arima = model_fit_arima.forecast(exog=getExoArrayForTest(len(history), scanningRange, False, False))
-    # y_arima = output_arima[0]
-    # predictions_arima.append(y_arima)
 
-    model_arimax = ARIMA(endog=history, order=(1, 0, 0), exog=getExoArrayForTrain(len(history), scanningRange, True, True))
+    model_arimax = ARIMA(endog=history, order=(1, 0, 0), exog=getExoArrayForTrain(len(history), scanningRange))
     model_fit_arimax = model_arimax.fit(disp=0, trend='nc', method='css') #, Ŷt - ϕ1Yt-1 = μ - θ1et-1 + β(Xt - ϕ1Xt-1) Formula Main ARIMAX
-    output_arimax = model_fit_arimax.forecast(exog=getExoArrayForTest(len(history), scanningRange, True, True))
+    output_arimax = model_fit_arimax.forecast(exog=getExoArrayForTest(len(history), scanningRange))
     # print(model_fit_arimax.summary())
     allTemporalCorrelationValue.append((sm.graphics.tsa.acf(history, nlags=1))[1])
     y_arimax = output_arimax[0]
@@ -301,8 +294,8 @@ for t in range(len(test)):
 
 # error_mse = mt.mean_squared_error(test, predictions_arima)
 # print('ARIMA Test MSE: %.3f' % error_mse)
-error_mae = mt.mean_absolute_error(test, predictions_arima)
-print('ARIMA Test MAE: %.3f' % error_mae)
+# error_mae = mt.mean_absolute_error(test, predictions_arima)
+# print('ARIMA Test MAE: %.3f' % error_mae)
 #
 # error_mse = mt.mean_squared_error(test, predictions_arimax)
 # print('ARIMAX Test MSE: %.3f' % error_mse)
@@ -332,10 +325,10 @@ maxValue.append(max(array2))
 # maxValue.append(max(array3))
 
 pyplot.plot(array1)
-pyplot.plot(array2, color='orange')
-pyplot.axis([0, len(array1),0,1.5])
-# pyplot.axis([0, len(array1),0, (max(maxValue) + 0.1)])
+#pyplot.plot(array2, color='orange')
+# pyplot.axis([0, len(array1),0,1.5])
+pyplot.axis([0, len(array1),0, (max(maxValue) + 0.1)])
 #pyplot.xticks(range(len(array1)), time[len(train):len(time)-1])
 pyplot.plot(array3, color='red')
-pyplot.show()
+# pyplot.show()
 

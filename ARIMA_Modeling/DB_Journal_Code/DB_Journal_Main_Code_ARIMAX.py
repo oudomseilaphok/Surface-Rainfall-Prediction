@@ -16,8 +16,10 @@ def getExoArrayForTrain(length):
             mapCorrelation.append(radarData[j][0:length])
         corrValue = list()
         for i in range(0,len(mapCorrelation)):
-            corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
-
+            # corrValue.append(sp.pearsonr(X[0:length], mapCorrelation[i])[0])
+            corrValue.append(sp.spearmanr(X[0:length], mapCorrelation[i])[0])
+        print(time[length])
+        print(corrValue)
         corrValue = np.array(corrValue)
         top3 = heapq.nlargest(3, range(len(corrValue)), corrValue.take)
 
@@ -87,7 +89,7 @@ def getExoArrayForTest(length):
         # print([test_r1[0], test_r2[0], test_r3[0], test_r4[0], test_r5[0], test_r6[0], test_r7[0], test_r8[0], test_r9[0]])
         return [test_r1[0], test_r2[0], test_r3[0]]
 
-path = "2_20170710_0130_2340_3pixels.csv"
+path = "sampling_3_2017_07_02.csv"
 X = list()
 time = list()
 radarData = list()
