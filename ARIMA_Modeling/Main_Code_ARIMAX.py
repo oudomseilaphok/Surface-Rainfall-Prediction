@@ -51,7 +51,7 @@ def getExoArrayForTrain(length, scanningRange, includeWindDirection, includeWind
 
         #For getting average spatial value for showing in Figure
         spatialCorrelationValue.append(sum(topSectionCorrValues) / len(topSectionCorrValues))
-
+        print(topSectionDataArray)
         #converting data into row by row arrays for training model
         exo_array = list()
         for i in range(0, len(topSectionDataArray[0])):
@@ -82,6 +82,7 @@ def getExoArrayForTest(length, scanningRange, includeWindDirection, includeWindS
         windDir = windDirection[length]
         topSection = scanningForMaxArea(scanningRange, corrValue, windDir, includeWindDirection)
         topSectionDataArray = list()
+        print(topSection)
 
         for topIndex in range(len(topSection)):
             test = radarData[topSection[topIndex]][length:length + 1]
@@ -222,10 +223,10 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir, includeWindDirec
     return  resultTopIndex
 
 # MAIN CODE START HERE:
-# path = "compiled_data/gangwon/2_20170710_0130_2340_7pixels.csv"
+# path = "compiled_data/gangwon/4_20170710_0130_2340_7pixels.csv"
 path = "compiled_data/3_20170702_0130_2340_7pixels_short.csv"
 main_includeWindDirection = True
-main_includeWindSpeed = True
+main_includeWindSpeed = False
 scanningRange = 3
 radarRange = 7 # 7 = 7 * 7
 nSelect = 3
@@ -280,15 +281,16 @@ for t in range(len(test)):
     # y_arima = output_arima[0]
     # predictions_arima.append(y_arima)
 
-    model_arimax = ARIMA(endog=history, order=(1, 0, 0), exog=getExoArrayForTrain(len(history), scanningRange, True, True))
+    model_arimax = ARIMA(endog=history, order=(1, 0, 0), exog=getExoArrayForTrain(len(history), scanningRange, main_includeWindDirection, main_includeWindSpeed))
     model_fit_arimax = model_arimax.fit(disp=0, trend='nc', method='css') #, Ŷt - ϕ1Yt-1 = μ - θ1et-1 + β(Xt - ϕ1Xt-1) Formula Main ARIMAX
-    output_arimax = model_fit_arimax.forecast(exog=getExoArrayForTest(len(history), scanningRange, True, True))
+    output_arimax = model_fit_arimax.forecast(exog=getExoArrayForTest(len(history), scanningRange, main_includeWindDirection, main_includeWindSpeed))
     # print(model_fit_arimax.summary())
     allTemporalCorrelationValue.append((sm.graphics.tsa.acf(history, nlags=1))[1])
     y_arimax = output_arimax[0]
     predictions_arimax.append(y_arimax)
-
+    print(y_arimax)
     obs = test[t]
+    print(obs)
     history.append(obs)
     if obs > 0.4:
         actual_data_percentage.append(obs)
@@ -299,22 +301,22 @@ for t in range(len(test)):
     # print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
     # print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
 
-# error_mse = mt.mean_squared_error(test, predictions_arima)
-# print('ARIMA Test MSE: %.3f' % error_mse)
-error_mae = mt.mean_absolute_error(test, predictions_arima)
-print('ARIMA Test MAE: %.3f' % error_mae)
-#
-# error_mse = mt.mean_squared_error(test, predictions_arimax)
-# print('ARIMAX Test MSE: %.3f' % error_mse)
-error_mae = mt.mean_absolute_error(test, predictions_arimax)
-print('ARIMAX Test MAE: %.3f' % error_mae)
+error_mse = mt.mean_squared_error(test, predictions_arima)
+print('ARIMA Test MSE: %.3f' % error_mse)
+# error_mae = mt.mean_absolute_error(test, predictions_arima)
+# print('ARIMA Test MAE: %.3f' % error_mae)
+# #
+error_mse = mt.mean_squared_error(test, predictions_arimax)
+print('ARIMAX Test MSE: %.3f' % error_mse)
+# error_mae = mt.mean_absolute_error(test, predictions_arimax)
+# print('ARIMAX Test MAE: %.3f' % error_mae)
 
 # print('average wind speed : %.3f' % (sum(windSpeed) / len(windSpeed)))
 
-# print('temporal corr:')
-# print(sum(allTemporalCorrelationValue) / len(allTemporalCorrelationValue))
-# print('spatial corr:')
-# print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
+print('temporal corr:')
+print(sum(allTemporalCorrelationValue) / len(allTemporalCorrelationValue))
+print('spatial corr:')
+print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
 #
 # error_mape = 100 - mean_absolute_percentage_error(actual_data_percentage, predict_data_percentage)
 # print('ARIMAX Test MAPE: %.3f' % error_mape)
