@@ -184,20 +184,20 @@ double get10MinutesWindDirection(string dateTime) {
 int main(int argc, char** argv)
 {
 
-	int stationIndex = 3;
+	int stationIndex = 4;
 	string trainDataSource = "aws/SURFACE_AWS_" + gangWonID[stationIndex] + "_MI_2017-07_2017-07_2018.csv";
 	int trainXaxis = utilityComponent.extractAWSLocation(gangWonLong[stationIndex], gangWonLat[stationIndex])[0];
 	int trainYaxis = utilityComponent.extractAWSLocation(gangWonLong[stationIndex], gangWonLat[stationIndex])[1];
 
-	datesTD = awsCompiler.getAWSRainyDay(trainDataSource, 0);
+	datesTD = awsCompiler.getAWSRainyDay(trainDataSource, 60);
 	
 	_availableExpDateTimeTD = showRainyScenario(trainDataSource, datesTD);
 	
 	fstream file;
 
-	int spatialArea = 3; // 3 = 3*3; 5 = 5*5
+	int spatialArea = 7; // 3 = 3*3; 5 = 5*5
 	int spatialRadius = (spatialArea - 1) / 2;
-	string filename = std::to_string(stationIndex) + "_20170702_0130_2340_3pixels.csv";
+	string filename = std::to_string(stationIndex) + "_20170708_0130_2340_3pixels.csv";
 	file.open(filename, fstream::out);
 	file << "Date,AWS,wind_speed,wind_direction";
 	for (int i = 1; i <= (spatialArea * spatialArea); i++) {
@@ -205,8 +205,8 @@ int main(int argc, char** argv)
 	}
 	file << "\n";
 
-	int startIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-02 01:30") - _availableExpDateTimeTD.begin();
-	int endIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-10 23:40") - _availableExpDateTimeTD.begin();
+	int startIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-08 01:30") - _availableExpDateTimeTD.begin();
+	int endIndex = std::find(_availableExpDateTimeTD.begin(), _availableExpDateTimeTD.end(), "2017-07-08 23:40") - _availableExpDateTimeTD.begin();
 	
 	for (int j = startIndex; j <= endIndex; j++) {
 

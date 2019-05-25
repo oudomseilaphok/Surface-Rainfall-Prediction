@@ -1,46 +1,4 @@
-﻿  stdafx.cpp
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(116): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'double', possible loss of data
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(151): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(179): warning C4101: 'alon': unreferenced local variable
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(179): warning C4101: 'alat': unreferenced local variable
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(179): warning C4101: 'yn': unreferenced local variable
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(179): warning C4101: 'xn': unreferenced local variable
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\stdafx.cpp(218): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  awscompiler.cpp
-  radarcompiler.cpp
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(128): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(140): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(141): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(145): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(146): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(150): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\radarcompiler.cpp(151): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-  RainFallsEstimationProject.cpp
+﻿  RainFallsEstimationProject.cpp
 c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\rainfallsestimationproject.cpp(105): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\rainfallsestimationproject.cpp(125): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\rainfallsestimationproject.cpp(137): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
@@ -59,5 +17,4 @@ c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\r
 c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\rainfallsestimationproject.cpp(208): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\rainfallsestimationproject.cpp(209): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 c:\users\bluex\desktop\surface-rainfall-prediction\rainfallmatrixlearningmodel\rainfallsestimationproject\rainfallsestimationproject.cpp(213): warning C4102: 'std': unreferenced label
-  Generating Code...
   RainFallsEstimationProject.vcxproj -> C:\Users\BlueX\Desktop\Surface-Rainfall-Prediction\RainfallMatrixLearningModel\x64\Debug\RainFallsEstimationProject.exe
