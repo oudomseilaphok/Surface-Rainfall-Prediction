@@ -223,8 +223,8 @@ def scanningForMaxArea(scanningWindow, corrValueDatas, windDir, includeWindDirec
     return  resultTopIndex
 
 # MAIN CODE START HERE:
-# path = "compiled_data/gangwon/4_20170710_0130_2340_7pixels.csv"
-path = "compiled_data/3_20170702_0130_2340_7pixels_short.csv"
+path = "compiled_data/gangwon/3_20170702_0130_2340_7pixels.csv"
+# path = "compiled_data/3_20170702_0130_2340_7pixels_short.csv"
 main_includeWindDirection = True
 main_includeWindSpeed = False
 scanningRange = 3
@@ -292,12 +292,6 @@ for t in range(len(test)):
     obs = test[t]
     print(obs)
     history.append(obs)
-    if obs > 0.4:
-        actual_data_percentage.append(obs)
-        predict_data_percentage.append(y_arimax)
-        # print(obs)
-        # print(y_arimax)
-        # print(abs(y_arimax - obs) / obs)
     # print('ARIMA predicted=%f, expected=%f' % (y_arima, obs))
     # print('ARIMAX predicted=%f, expected=%f' % (y_arimax, obs))
 
@@ -308,15 +302,15 @@ print('ARIMA Test MSE: %.3f' % error_mse)
 # #
 error_mse = mt.mean_squared_error(test, predictions_arimax)
 print('ARIMAX Test MSE: %.3f' % error_mse)
-# error_mae = mt.mean_absolute_error(test, predictions_arimax)
-# print('ARIMAX Test MAE: %.3f' % error_mae)
+error_mae = mt.mean_absolute_error(test, predictions_arimax)
+print('ARIMAX Test MAE: %.3f' % error_mae)
 
 # print('average wind speed : %.3f' % (sum(windSpeed) / len(windSpeed)))
 
-print('temporal corr:')
-print(sum(allTemporalCorrelationValue) / len(allTemporalCorrelationValue))
-print('spatial corr:')
-print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
+# print('temporal corr:')
+# print(sum(allTemporalCorrelationValue) / len(allTemporalCorrelationValue))
+# print('spatial corr:')
+# print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
 #
 # error_mape = 100 - mean_absolute_percentage_error(actual_data_percentage, predict_data_percentage)
 # print('ARIMAX Test MAPE: %.3f' % error_mape)
@@ -324,20 +318,22 @@ print(sum(spatialCorrelationValue) / len(spatialCorrelationValue))
 # plot
 # array1 = train + test
 # array2 = train + predictions
+
 maxValue = list()
 array1 = test
-array2 = predictions_arima
+array1.pop(0)
+# array2 = predictions_arima
 array3 = predictions_arimax
-
+array3.pop(0)
 maxValue.append(max(array1))
-maxValue.append(max(array2))
+# maxValue.append(max(array2))
 # maxValue.append(max(array3))
 
-pyplot.plot(array1)
-pyplot.plot(array2, color='orange')
+pyplot.plot(array1, label='Actual Surface Rainfall')
+# pyplot.plot(array2, color='orange')
 pyplot.axis([0, len(array1),0,1.5])
 # pyplot.axis([0, len(array1),0, (max(maxValue) + 0.1)])
 #pyplot.xticks(range(len(array1)), time[len(train):len(time)-1])
-pyplot.plot(array3, color='red')
+pyplot.plot(array3, label='SDAM - Predicted' , color='red')
 pyplot.show()
 
